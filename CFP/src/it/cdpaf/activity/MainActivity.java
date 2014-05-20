@@ -1,5 +1,9 @@
-package it.cdpaf;
+package it.cdpaf.activity;
 
+import it.cdpaf.R;
+import it.cdpaf.R.id;
+import it.cdpaf.R.layout;
+import it.cdpaf.R.menu;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
