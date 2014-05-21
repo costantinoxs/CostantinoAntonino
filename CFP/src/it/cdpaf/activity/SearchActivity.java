@@ -48,10 +48,7 @@ public class SearchActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		ctx=this.getBaseContext();
 		setContentView(R.layout.activity_search);
-		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
-		}
+	
 		
 		TextView tvSearch = (TextView) findViewById(R.id.tvSearch);
 		final EditText etSearch = (EditText) findViewById(R.id.etGenericSearch);
@@ -64,6 +61,7 @@ public class SearchActivity extends Activity {
             	if(res==1){
             		Intent intent = new Intent(getBaseContext(), SearchListActivity.class);
             		intent.putExtra("PRODUCTLIST",(Parcelable) list);
+            		intent.putExtra("search_item", etSearch.getText().toString());
                 	startActivity(intent);
             	}
             	if(res==0){
@@ -109,22 +107,7 @@ public class SearchActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_search,
-					container, false);
-			return rootView;
-		}
-	}
+	
 public class SearchData extends AsyncTask<String, Void, Void> {
 		
 		@Override
