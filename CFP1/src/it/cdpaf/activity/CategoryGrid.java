@@ -48,6 +48,7 @@ public class CategoryGrid extends Activity {
 	Context ctx;
 	private int idMacrocategory;
 	private String Macrocategory;
+	//
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
