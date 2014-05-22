@@ -39,6 +39,11 @@
             android:label="@string/title_activity_search_list"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="it.cdpaf.activity.CategoryGrid"
+            android:label="@string/title_activity_category_grid"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>

@@ -82,6 +82,68 @@ public class DrawableManager {
             return null;
         }
     }
+    
+    public static void fetchDrawableOnThread( final Macrocategory mac, final ImageView imageView, final Context ctx) {
+        final String urlString=Const.IMAGE_URL+mac.getNomeImmagine();
+    	if (drawableMap.containsKey(urlString)) {
+            imageView.setImageDrawable(drawableMap.get(urlString));
+            //product.setImmagine(drawableMap.get(urlString));
+        }
+
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message message) {
+                Drawable dr = (Drawable) message.obj;
+            	imageView.setImageDrawable(dr);
+                mac.setImmagine(dr);
+            }
+        };
+
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                //TODO : set imageView to a "pending" image
+            	Drawable d = ctx.getResources().getDrawable( R.drawable.ic_launcher );
+            	Message messagea = handler.obtainMessage(1, d);
+                handler.sendMessage(messagea);
+                Drawable drawable = fetchDrawable(urlString,ctx);
+                Message messageb = handler.obtainMessage(1, drawable);
+                handler.sendMessage(messageb);
+            }
+        };
+        thread.start();
+    }
+    
+    public static void fetchDrawableOnThread( final Category cat, final ImageView imageView, final Context ctx) {
+        final String urlString=Const.IMAGE_URL+cat.getNomeImmagine();
+    	if (drawableMap.containsKey(urlString)) {
+            imageView.setImageDrawable(drawableMap.get(urlString));
+            //product.setImmagine(drawableMap.get(urlString));
+        }
+
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message message) {
+                Drawable dr = (Drawable) message.obj;
+            	imageView.setImageDrawable(dr);
+                cat.setImmagine(dr);
+            }
+        };
+
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                //TODO : set imageView to a "pending" image
+            	Drawable d = ctx.getResources().getDrawable( R.drawable.ic_launcher );
+            	Message messagea = handler.obtainMessage(1, d);
+                handler.sendMessage(messagea);
+                Drawable drawable = fetchDrawable(urlString,ctx);
+                Message messageb = handler.obtainMessage(1, drawable);
+                handler.sendMessage(messageb);
+            }
+        };
+        thread.start();
+    }
 
     public static void fetchDrawableOnThread( final Product product, final ImageView imageView, final Context ctx) {
         final String urlString=Const.IMAGE_URL+product.getPercorsoImmagine();

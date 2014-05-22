@@ -16,5 +16,6 @@
     <string name="tCancel">Annulla</string>
     <string name="tMoreResults">Mostra i prossimi 20</string>
     <string name="title_activity_search_list">SearchListActivity</string>
+    <string name="title_activity_category_grid">Categorie</string>
 
 </resources>
