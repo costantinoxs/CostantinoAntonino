@@ -1,5 +1,7 @@
 package it.cdpaf.activity;
 
+import java.io.ByteArrayOutputStream;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,6 +18,8 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,6 +32,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.os.Build;
 
@@ -89,11 +95,41 @@ public class SearchListActivity extends Activity {
             		listView.setAdapter(adaptern);
             	}
             	if(res==0){
-            		
+            		//Intent intent = new Intent(getBaseContext(), DetailActivity.class);
+            		//intent.putExtra("PRODUCTLIST",(Parcelable) list);
+            		//intent.putExtra("search_item", etSearch.getText().toString());
+                	//startActivity(intent);
             	}
             }
 		};
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(getBaseContext(), DetailActivity.class);
+        		intent.putExtra("PRODUCT",(Parcelable) productList.get(position));
+        		
+        		//Codice per passare immagine attraverso l'intent
+        		Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);     
+        		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        		bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos); 
+        		byte[] b = baos.toByteArray();
+        		intent.putExtra("picture", b);
+        		
+        		startActivity(intent);
+     
+        		
+        		
+        	/*
+        	 * 
+        	 * */	
+        		
+			}
+		});
 		listView.setAdapter(adapter);
+		
 		
 	}
 

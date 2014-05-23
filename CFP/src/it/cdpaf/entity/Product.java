@@ -7,7 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Product {
+public class Product implements Parcelable{
 	private String		id;
 	private String 		codice;
 	private String 		percorsoImmagine;
@@ -158,8 +158,60 @@ public class Product {
 	public void setImmagine(Drawable immagine) {
 		this.immagine = immagine;
 	}
+
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		// TODO Auto-generated method stub
+		
+			dest.writeString(id);
+			dest.writeString(codice);
+			dest.writeString(percorsoImmagine);
+			dest.writeDouble(prezzo);
+			dest.writeInt(quantita);
+			dest.writeString(produttore);
+			dest.writeString(nome);
+			dest.writeString(descrizione);
+			dest.writeString(icecat);
+			dest.writeString(id_categoria);
+			dest.writeString(id_sottocategoria);
+			dest.writeString(nome_categoria);
+			dest.writeString(nome_sotto_categoria);
+						
+	}
+	private Product(Parcel in) {
+		 super();
+		
+				this.id = in.readString();
+				this.codice = in.readString();
+				this.percorsoImmagine = in.readString();
+				this.prezzo = in.readDouble();
+				this.quantita = in.readInt();
+				this.produttore = in.readString();
+				this.nome = in.readString();
+				this.descrizione = in.readString();
+				this.icecat = in.readString();
+				this.id_categoria = in.readString();
+				this.id_sottocategoria = in.readString();
+				this.nome_categoria = in.readString();
+				this.nome_sotto_categoria = in.readString();
+			
+	}
+		 
 	
-	
+	public static final Parcelable.Creator<Product> CREATOR = new Parcelable.Creator<Product>() {
+	     public Product createFromParcel(Parcel in) {
+	         return new Product(in);
+	     }
+	     public Product[] newArray(int size) {
+	         return new Product[size];
+	     }
+	};
 	
 	
 }
