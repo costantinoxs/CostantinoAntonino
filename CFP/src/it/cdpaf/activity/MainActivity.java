@@ -90,8 +90,8 @@ public class MainActivity extends Activity {
 					// TODO Auto-generated method stub
 			        Log.i("Push", ""+arg2+" "+listMacrocategories.get(arg2).getName());
 			        Intent intent = new Intent(getBaseContext(), CategoryGrid.class);
-            		intent.putExtra("idMacrocategory",listMacrocategories.get(arg2).getId());
-            		intent.putExtra("Macrocategory",listMacrocategories.get(arg2).getName());
+            		intent.putExtra("idCategory",listMacrocategories.get(arg2).getId());
+            		intent.putExtra("nomeCategory",listMacrocategories.get(arg2).getName());
 
             		startActivity(intent);
 				}
