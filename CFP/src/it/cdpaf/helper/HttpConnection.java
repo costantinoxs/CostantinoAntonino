@@ -115,7 +115,7 @@ public class HttpConnection {
 				Log.e("TIMEOUT", "Timeout connection: " + e.toString());
 				object = new JSONObject();
 				object.put("result", Const.TIMEOUT);
-				return object;
+				return object; 
 			}
 			else{
 				Log.e("TIMEOUT", "Timeout connection: " + e.toString());
