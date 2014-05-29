@@ -27,6 +27,7 @@ import it.cdpaf.entity.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,6 +37,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
@@ -48,7 +51,7 @@ public class DrawableManager {
     public static Map<String, Drawable> drawableMap = new HashMap<String, Drawable>();
     
     public DrawableManager() {
-    	 drawableMap = new HashMap<String, Drawable>();
+    	 //drawableMap = new HashMap<String, Drawable>();
     }
 
     public static Drawable fetchDrawable(String urlString, Context ctx) {
@@ -60,7 +63,10 @@ public class DrawableManager {
 
         Log.d(ctx.getClass().getSimpleName(), "image url:" + urlString);
         try {
+        	
+        	
             InputStream is = fetch(urlString,ctx);
+            Log.i("IS:--->",is.toString());
             Drawable drawable = Drawable.createFromStream(is, "src");
 
 
@@ -81,6 +87,14 @@ public class DrawableManager {
             Log.e(ctx.getClass().getSimpleName(), "IO EXCP fetchDrawable failed", e);
             return null;
         }
+    }
+    
+    public static Drawable returnDrawable(String urlString, Context ctx) {
+        	
+        	Log.d(ctx.getClass().getSimpleName(),"return ------DRAWABLE MAN:"+ "RIUSO: "+urlString+" Size:"+drawableMap.size());
+        	Drawable d= drawableMap.get(urlString);
+            return d;
+        
     }
     
     public static void fetchDrawableOnThread( final Macrocategory mac, final ImageView imageView, final Context ctx) {
@@ -179,6 +193,53 @@ public class DrawableManager {
         Log.i("DRAWABLE MANAGER:","LANCIO FDOT, Size:"+drawableMap.size());
         thread.start();
     }
+    
+    public static ArrayList<Drawable> fetchAllDrawableOnThread(String imagepath, final Context ctx) {
+        final String urlString=Const.IMAGE_URL+imagepath;
+        final ArrayList<Drawable> res= new ArrayList<Drawable>();
+        for (int i=1;i<30;i++){
+        	
+        	String url=urlString+"_"+i;
+        	String[] result = urlString.split(".j");
+        	String prima=result[0];
+        	String seconda=result[1];
+        	String jpg=".j"+seconda;
+        	final String urlStringValid=prima+"_"+i+jpg;
+        	
+        	if (drawableMap.containsKey(urlStringValid)) {
+        		Log.d("ALL DRAWABLE","INDIVIDUATO UN RIUSO : "+ urlStringValid);
+            	res.add(drawableMap.get(urlStringValid));
+            }
+        	
+        	final Handler handler = new Handler() {
+                @Override
+                public void handleMessage(Message message) {
+                    Drawable e =((Drawable) message.obj);
+                    res.add(e);
+                }
+            };
+            
+            Thread thread = new Thread() {
+                @Override
+                public void run() {
+                    //TODO : set imageView to a "pending" image
+                	Drawable d = ctx.getResources().getDrawable( R.drawable.blank );
+                	Message messagea = handler.obtainMessage(1, d);
+                    handler.sendMessage(messagea);
+                    Drawable drawable = fetchDrawable(urlStringValid,ctx);
+                    
+                    Message messageb = handler.obtainMessage(1, drawable);
+                    handler.sendMessage(messageb);
+                }
+            };
+            Log.d("ALL DRAWABLE","LANCIO UNA RICERCA : "+ urlStringValid);
+            thread.start();
+        }
+        
+        return res;
+    	
+        
+    }
    /* 
     public void fetchDrawableOnThread(final String urlString, final Product product, final Context ctx) {
         if (drawableMap.containsKey(urlString)) {
@@ -212,6 +273,7 @@ public class DrawableManager {
         HttpGet request = new HttpGet(urlString);
         HttpResponse response = httpClient.execute(request);
         return response.getEntity().getContent();
+        
     }
 /*
 	public static void fetchDrawableQrCode(int ordId,final FragmentActivity ctx,final ImageView imageView) {

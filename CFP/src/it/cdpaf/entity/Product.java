@@ -44,7 +44,6 @@ public class Product implements Parcelable{
 		this.id_sottocategoria = id_sottocategoria;
 		this.nome_categoria = nome_categoria;
 		this.nome_sotto_categoria = nome_sotto_categoria;
-		
 	}
 
 	public String getId() {
@@ -156,6 +155,7 @@ public class Product implements Parcelable{
 	}
 
 	public void setImmagine(Drawable immagine) {
+		 
 		this.immagine = immagine;
 	}
 

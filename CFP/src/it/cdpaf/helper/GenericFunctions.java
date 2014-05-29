@@ -29,8 +29,13 @@ public class GenericFunctions {
 	public static String currencyStamp(double d){
 		double price=d;
 		DecimalFormat df= new DecimalFormat ("#.00");
-		if(d == 0) return "0,00";
-		else return df.format(price);
+		if(d == 0) {
+			return "0,00"+" \u20ac";
+		}
+		else {
+			String res=df.format(price)+" \u20ac";
+			return res;
+		}
 	}
 	public static String getDate(){
 		long msTime = System.currentTimeMillis();  

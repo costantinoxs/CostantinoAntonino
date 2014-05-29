@@ -29,30 +29,31 @@ public final class R {
         public static final int icons8_preview=0x7f020004;
     }
     public static final class id {
-        public static final int action_basket_item=0x7f080022;
-        public static final int action_menu_item=0x7f080023;
-        public static final int action_search_item=0x7f080021;
-        public static final int action_settings=0x7f080020;
+        public static final int action_basket_item=0x7f080023;
+        public static final int action_menu_item=0x7f080024;
+        public static final int action_search_item=0x7f080022;
+        public static final int action_settings=0x7f080021;
         public static final int btnSearch=0x7f080005;
         public static final int container=0x7f080002;
         public static final int etGenericSearch=0x7f080004;
-        public static final int gridMacroCategory=0x7f080016;
+        public static final int gallery=0x7f080014;
+        public static final int gridMacroCategory=0x7f080017;
         public static final int ivCategory=0x7f080007;
-        public static final int ivDetailImage=0x7f08001c;
+        public static final int ivDetailImage=0x7f08001d;
         public static final int ivFirstPhoto=0x7f08000b;
-        public static final int ivMacroCategory=0x7f080018;
+        public static final int ivGallery=0x7f080015;
+        public static final int ivMacroCategory=0x7f080019;
         public static final int list=0x7f080006;
-        public static final int list_elem_image=0x7f08001e;
+        public static final int list_elem_image=0x7f08001f;
         public static final int pager=0x7f080000;
         public static final int pager_title_strip=0x7f080001;
-        public static final int price=0x7f08001f;
-        public static final int prod_description=0x7f08001b;
+        public static final int price=0x7f080020;
+        public static final int prod_description=0x7f08001c;
         public static final int section_label=0x7f08000a;
-        public static final int section_label_three=0x7f080014;
-        public static final int section_label_two=0x7f080015;
-        public static final int textView1=0x7f080017;
+        public static final int section_label_two=0x7f080016;
+        public static final int textView1=0x7f080018;
         public static final int thumbnail=0x7f080009;
-        public static final int title=0x7f08001a;
+        public static final int title=0x7f08001b;
         public static final int tvAvailability=0x7f080011;
         public static final int tvAvailabilityLabel=0x7f080010;
         public static final int tvDescription=0x7f080013;
@@ -61,10 +62,10 @@ public final class R {
         public static final int tvPriceLabel=0x7f08000c;
         public static final int tvProductor=0x7f08000f;
         public static final int tvProductorLabel=0x7f08000e;
-        public static final int tvQuantitative=0x7f08001d;
+        public static final int tvQuantitative=0x7f08001e;
         public static final int tvSearch=0x7f080003;
         public static final int tvTitleCategory=0x7f080008;
-        public static final int tvTitleMacroCategory=0x7f080019;
+        public static final int tvTitleMacroCategory=0x7f08001a;
     }
     public static final class layout {
         public static final int activity_detail=0x7f030000;
@@ -89,6 +90,7 @@ public final class R {
         public static final int search_list=0x7f070003;
     }
     public static final class string {
+        public static final int Euro=0x7f050015;
         public static final int action_settings=0x7f050003;
         public static final int app_name=0x7f050002;
         public static final int hello_world=0x7f050000;

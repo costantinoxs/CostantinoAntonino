@@ -12,8 +12,8 @@ import android.net.NetworkInfo;
 
 public class Const {
 	public static final String APPNAME ="Computer Family"; 
-	public static final String IPADDRESS = "computerfamilyapp.no-ip.org:88/CF/";
-//	public static final String IPADDRESS = "192.168.1.200:88";
+	public static final String IPADDRESS = "dev.computerfamily.it/cfapp/";
+//	public static final String IPADDRESS = "10.0.2.2";
 	
 	
 	public static final String IMAGE_URL = "http://www.computerfamily.it/store/images/";

@@ -22,6 +22,7 @@
     <string name="label_description">Descrizione:</string>
     <string name="label_productor">Produttore:</string>
     <string name="label_availability">Disponibilità:</string>
+     <string name="Euro">\u20ac</string>
     
 
 </resources>

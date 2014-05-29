@@ -110,14 +110,6 @@ public class SearchListActivity extends Activity {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(getBaseContext(), DetailActivity.class);
         		intent.putExtra("PRODUCT",(Parcelable) productList.get(position));
-        		
-        		//Codice per passare immagine attraverso l'intent
-        		Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);     
-        		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        		bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos); 
-        		byte[] b = baos.toByteArray();
-        		intent.putExtra("picture", b);
-        		
         		startActivity(intent);
      
         		
