@@ -11,7 +11,15 @@ import java.text.SimpleDateFormat;
 import android.util.Log;
 
 public class GenericFunctions {
+	public static String convertStreamToString(java.io.InputStream is) {
+	    try {
+	        return new java.util.Scanner(is).useDelimiter("\\A").next();
+	    } catch (java.util.NoSuchElementException e) {
+	        return "";
+	    }
+	}
 	public static StringBuilder inputStreamToString(InputStream is) {
+		
 		String rLine = "";
 		StringBuilder answer = new StringBuilder();
 		BufferedReader rd = new BufferedReader(new InputStreamReader(is));

@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -133,6 +134,8 @@ public class SearchData extends AsyncTask<String, Void, Void> {
 				JSONArray array = connection.connectForCataalog("info_download_cf", json,Const.CONNECTION_TIMEOUT,Const.SOCKET_TIMEOUT);
 				
 				JSONObject jObj = (JSONObject) array.get(0);
+				JSONObject jObj2 = (JSONObject) array.get(1);
+				Log.i("Secondo Prodotto",jObj2.toString(4));
 				int res=Integer.parseInt(jObj.getString("result"));
 				
 				if(res==1){

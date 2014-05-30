@@ -50,7 +50,6 @@ public final class R {
         public static final int price=0x7f080020;
         public static final int prod_description=0x7f08001c;
         public static final int section_label=0x7f08000a;
-        public static final int section_label_two=0x7f080016;
         public static final int textView1=0x7f080018;
         public static final int thumbnail=0x7f080009;
         public static final int title=0x7f08001b;
@@ -66,6 +65,7 @@ public final class R {
         public static final int tvSearch=0x7f080003;
         public static final int tvTitleCategory=0x7f080008;
         public static final int tvTitleMacroCategory=0x7f08001a;
+        public static final int webView=0x7f080016;
     }
     public static final class layout {
         public static final int activity_detail=0x7f030000;

@@ -1,6 +1,7 @@
 package it.cdpaf.helper;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -297,6 +298,7 @@ public class HttpConnection {
 			BasicHttpResponse httpResponse = (BasicHttpResponse)  httpClient.execute(httpPost);
 			
 			// Conersione da inputString a JsonResult
+			
 			String jsonResult = GenericFunctions.inputStreamToString(
 					httpResponse.getEntity().getContent()).toString();
 			Log.i("JsonResult", "[" + jsonResult + "]");

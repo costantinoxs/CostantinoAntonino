@@ -42,6 +42,7 @@ public class ListProduct extends ArrayList<Product> implements Parcelable {
 						jTemp.getString("id_sottocategoria"),
 						jTemp.getString("nome_categoria"),
 						jTemp.getString("nome_sotto_categoria"));
+				Log.i("ECCOLOOOOOOOOO",temp.getIcecat());
 				this.add(temp);
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block

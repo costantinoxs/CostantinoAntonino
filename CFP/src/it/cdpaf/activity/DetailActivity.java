@@ -39,6 +39,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -236,7 +237,17 @@ public class DetailActivity extends FragmentActivity {
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_detail_two,
 					container, false);
-			Product prod = getArguments().getParcelable("PRODUCT");
+			Product productTwo = getArguments().getParcelable("PRODUCT");
+			
+			WebView wvIcecat = (WebView) rootView.findViewById(R.id.webView);
+			
+			// lets assume we have /assets/style.css file
+			String mime = "text/html";
+			String encoding = "utf-8";
+			Log.i("ICECAT ",productTwo.getIcecat());
+			String htmlData = "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />" + productTwo.getIcecat();
+			
+			wvIcecat.loadDataWithBaseURL("file:///android_asset/", htmlData , mime, encoding, null);
 			return rootView;
 		}
 	}

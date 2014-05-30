@@ -1,0 +1,46 @@
+.scheda{
+	  width:100% !important;width /**/:200px;
+    height:100% !important;height /**/: 200px;
+    overflow:auto;padding: 4px;
+    border:1px solid #DFDFDF;-- border-right:1 solid;
+    background:url(gradient.png) repeat-x fixed top left
+	}
+
+.productspecs{
+  font-size:12px;
+  color:black;
+ } 
+ 
+ .even{  
+  background-color:#DFDFDF;
+ }
+ 
+.scheda th{
+  text-align:left;
+ } 
+ 
+ .speccategory{
+  line-height:200%;
+  background-color:#FF6666;
+  font-weight:bold;  
+  vertical-align:middle;
+ } 
+ 
+ .speccategory th{
+
+  font-size:12px;
+  margin-bottom-5px;
+ }
+
+ .productspecs td{
+    line-height:2.0;
+	width:50%;
+}
+.noinfo h2 {
+	width:100%;
+	font-size:12px;
+	font-family:Verdana;
+	align:center;
+	color:#bb0000;
+}
+
