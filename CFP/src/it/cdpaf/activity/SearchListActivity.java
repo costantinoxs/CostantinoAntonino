@@ -46,6 +46,8 @@ public class SearchListActivity extends Activity {
 	private Dialogs dialogs;
 	private Context ctx;
 	private String search_item;
+	private String mode;
+	private String search_prod_category="";
 	
 	ListProduct productList;
 	
@@ -57,6 +59,8 @@ public class SearchListActivity extends Activity {
 		
 		Intent intent = getIntent();
 		search_item=intent.getStringExtra("search_item");
+		search_prod_category=intent.getStringExtra("search_prod_category");
+		mode=intent.getStringExtra("mode");
 		productList  = (ListProduct) intent.getParcelableExtra("PRODUCTLIST");
 		productList.print("List");
 		  
@@ -80,7 +84,14 @@ public class SearchListActivity extends Activity {
             	System.gc();
             	offset=offset+20;
             	SearchData task = new SearchData();
-				task.execute(search_item);
+				if(search_prod_category.length()==0){
+					String mode ="1";
+					task.execute(search_item,mode);
+				}
+				else{
+					String mode ="0";
+					task.execute(search_prod_category,mode);
+				}
             }
 
         });
@@ -160,6 +171,7 @@ public class SearchData extends AsyncTask<String, Void, Void> {
 		@Override
 		protected Void doInBackground(String... params) {
 			String strToSearch = params[0];
+			String mode = params[1];
 			JSONObject json = new JSONObject();
 			try {
 				HttpConnection connection = new HttpConnection();
@@ -167,9 +179,10 @@ public class SearchData extends AsyncTask<String, Void, Void> {
 				json.put("search", strToSearch);
 				json.put("offset", offset);
 				json.put("range", range);
+				json.put("mode", mode);
 				
 				
-				JSONArray array = connection.connectForCataalog("info_download_cf", json,Const.CONNECTION_TIMEOUT,Const.SOCKET_TIMEOUT);
+				JSONArray array = connection.connectForCataalog("info_download_cf2", json,Const.CONNECTION_TIMEOUT,Const.SOCKET_TIMEOUT);
 				
 				JSONObject jObj = (JSONObject) array.get(0);
 				int res=Integer.parseInt(jObj.getString("result"));

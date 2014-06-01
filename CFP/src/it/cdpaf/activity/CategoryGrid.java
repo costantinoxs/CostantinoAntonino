@@ -85,6 +85,8 @@ public class CategoryGrid extends Activity {
                         		finish();
                         		Intent intent = new Intent(getBaseContext(), SearchListActivity.class);
                         		intent.putExtra("PRODUCTLIST",(Parcelable) list);
+                        		intent.putExtra("search_item", "");
+                        		intent.putExtra("mode",Const.CATEGORYMODE);
                         		intent.putExtra("search_prod_category", ""+idCategory);
                             	startActivity(intent);
                         	}
@@ -125,6 +127,7 @@ public class CategoryGrid extends Activity {
 			        Intent intent = new Intent(getBaseContext(), CategoryGrid.class);
             		intent.putExtra("idCategory",listCategories.get(arg2).getId());
             		intent.putExtra("nomeCategory",listCategories.get(arg2).getName());
+            		
                 	startActivity(intent);
 				}
 			});

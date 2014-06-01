@@ -63,6 +63,8 @@ public class SearchActivity extends Activity {
             		Intent intent = new Intent(getBaseContext(), SearchListActivity.class);
             		intent.putExtra("PRODUCTLIST",(Parcelable) list);
             		intent.putExtra("search_item", etSearch.getText().toString());
+            		intent.putExtra("mode",Const.SEARCHMODE);
+            		intent.putExtra("search_prod_category", "");
                 	startActivity(intent);
             	}
             	if(res==0){
@@ -129,9 +131,10 @@ public class SearchData extends AsyncTask<String, Void, Void> {
 				json.put("search", strToSearch);
 				json.put("offset", offset);
 				json.put("range", range);
+				json.put("mode", 1);
 				
 				
-				JSONArray array = connection.connectForCataalog("info_download_cf", json,Const.CONNECTION_TIMEOUT,Const.SOCKET_TIMEOUT);
+				JSONArray array = connection.connectForCataalog("info_download_cf2", json,Const.CONNECTION_TIMEOUT,Const.SOCKET_TIMEOUT);
 				
 				JSONObject jObj = (JSONObject) array.get(0);
 				JSONObject jObj2 = (JSONObject) array.get(1);

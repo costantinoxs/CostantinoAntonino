@@ -102,7 +102,7 @@ public class ListProductSearchAdapter extends ArrayAdapter<Product> {
 		String price = GenericFunctions.currencyStamp(productList.get(position).getPrezzo());
 		
 		
-		tvPrice.setText(price+" "+"\u20ac"+" ");
+		tvPrice.setText(price+" ");
 	/*	itemSelection.setChecked(productList.get(position).isChecked());
 		itemSelection.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			

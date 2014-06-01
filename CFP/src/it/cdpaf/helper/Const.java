@@ -13,6 +13,8 @@ import android.net.NetworkInfo;
 public class Const {
 	public static final String APPNAME ="Computer Family"; 
 	public static final String IPADDRESS = "dev.computerfamily.it/cfapp/";
+	public static final String SEARCHMODE = "1";
+	public static final String CATEGORYMODE = "0";
 //	public static final String IPADDRESS = "10.0.2.2";
 	
 	

@@ -43,8 +43,9 @@ public class GenericFunctions {
 		return answer;
 	}
 	public static String currencyStamp(double d){
+		
 		double price=d;
-		DecimalFormat df= new DecimalFormat ("#.00");
+		DecimalFormat df= new DecimalFormat ("0.00");
 		if(d == 0) {
 			return "0,00"+" \u20ac";
 		}
