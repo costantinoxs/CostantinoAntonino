@@ -49,6 +49,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Const.initializeBasketList();
 		setContentView(R.layout.fragment_fanta_search_macrocategory);
 		listMacrocategories = new ListMacrocategories();
 		ctx=this;

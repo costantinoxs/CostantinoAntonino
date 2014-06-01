@@ -51,10 +51,13 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -214,7 +217,14 @@ public class DetailActivity extends FragmentActivity {
 			TextView tvDescription = (TextView) rootView.findViewById(R.id.tvDescription);
 			TextView tvAvailability = (TextView) rootView.findViewById(R.id.tvAvailability);
 			ImageView iv = (ImageView) rootView.findViewById(R.id.ivFirstPhoto);
-			Product prod = getArguments().getParcelable("PRODUCT");
+			
+			Button buttonMinus = (Button) rootView.findViewById(R.id.buttonMinus);
+			EditText etQuant = (EditText) rootView.findViewById(R.id.etQuantitative);
+			Button ButtonPlus = (Button) rootView.findViewById(R.id.buttonPlus);
+			Button buttonAddToBasket = (Button) rootView.findViewById(R.id.buttonAddToBasket);
+			
+			
+			final Product prod = getArguments().getParcelable("PRODUCT");
 			
 			tvPrice.setText(GenericFunctions.currencyStamp(prod.getPrezzo()));
 			tvProductor.setText(prod.getProduttore());
@@ -225,6 +235,16 @@ public class DetailActivity extends FragmentActivity {
 			
 			iv.setImageDrawable(d);
 			iv.invalidate();
+			
+			buttonAddToBasket.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					
+					Const.basketProductList.add(prod);
+				}
+			});
 			return rootView;
 		}
 	}

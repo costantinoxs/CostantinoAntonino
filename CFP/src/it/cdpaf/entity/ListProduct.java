@@ -21,7 +21,9 @@ import android.util.Log;
 public class ListProduct extends ArrayList<Product> implements Parcelable {
 	int count=0;
 	
-	
+	public ListProduct(){
+		super();
+	}	
 	public ListProduct(JSONArray array){
 		super();
 		for(int i=0;i<array.length();i++){

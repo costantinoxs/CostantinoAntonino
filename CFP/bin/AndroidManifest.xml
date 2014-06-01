@@ -51,6 +51,11 @@
             android:label="@string/title_activity_detail"
             android:screenOrientation="portrait"  >
         </activity>
+        <activity
+            android:name="it.cdpaf.activity.BasketActivity"
+            android:label="@string/title_activity_detail"
+            android:screenOrientation="portrait"  >
+        </activity>
     </application>
 
 </manifest>

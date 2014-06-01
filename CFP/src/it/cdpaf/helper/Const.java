@@ -1,5 +1,7 @@
 package it.cdpaf.helper;
 
+import it.cdpaf.entity.ListProduct;
+
 import java.text.DecimalFormat;
 
 import android.content.Context;
@@ -17,6 +19,7 @@ public class Const {
 	public static final String CATEGORYMODE = "0";
 //	public static final String IPADDRESS = "10.0.2.2";
 	
+	public static ListProduct basketProductList;
 	
 	public static final String IMAGE_URL = "http://www.computerfamily.it/store/images/";
 	public static final String QRCODE_URL = "http://"+IPADDRESS+"/images/QRCOrdini/";
@@ -52,6 +55,10 @@ public class Const {
         context.sendBroadcast(intent);
     }
 	
+	public static final void initializeBasketList() {
+		basketProductList=new ListProduct();
+	}
+
 	
 	public static final Drawable resize(Drawable image) {
 	    Bitmap b = ((BitmapDrawable)image).getBitmap();

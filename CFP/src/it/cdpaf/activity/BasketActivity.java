@@ -45,74 +45,28 @@ public class BasketActivity extends Activity {
 	private Handler handler;
 	private Dialogs dialogs;
 	private Context ctx;
-	private String search_item;
-	private String mode;
-	private String search_prod_category="";
 	
-	ListProduct productList;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ctx=this;
-		
 		setContentView(R.layout.activity_basket);
 		
-		Intent intent = getIntent();
-		search_item=intent.getStringExtra("search_item");
-		search_prod_category=intent.getStringExtra("search_prod_category");
-		mode=intent.getStringExtra("mode");
-		productList  = (ListProduct) intent.getParcelableExtra("PRODUCTLIST");
-		productList.print("List");
+		//Const.basketProductList;
+		
+		
 		  
-		final ListView listView =(ListView) findViewById(R.id.list);
+		final ListView listView =(ListView) findViewById(R.id.listBasket);
 		
 		final ListProductSearchAdapter adapter = 
 				new ListProductSearchAdapter(this,
-				R.layout.product_choice_list_item, productList);
+				R.layout.product_choice_list_item, Const.basketProductList);
 		
 		
-		View footerView = ((LayoutInflater)this
-				.getSystemService(this.LAYOUT_INFLATER_SERVICE))
-				.inflate(R.layout.listfooter, null, false);
-        listView.addFooterView(footerView);
 		
-		footerView.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-            	System.gc();
-             	SearchData task = new SearchData();
-				if(search_prod_category.length()==0){
-					String mode ="1";
-					task.execute(search_item,mode);
-				}
-				else{
-					String mode ="0";
-					task.execute(search_prod_category,mode);
-				}
-            }
-
-        });
-		handler = new Handler() {
-            @Override
-            public void handleMessage(Message mess) {
-            	int res = mess.arg1;
-            	if(res==1){
-            		final ListProductSearchAdapter adaptern = 
-            				new ListProductSearchAdapter(ctx,
-            				R.layout.product_choice_list_item, productList);
-            		listView.setAdapter(adaptern);
-            	}
-            	if(res==0){
-            		//Intent intent = new Intent(getBaseContext(), DetailActivity.class);
-            		//intent.putExtra("PRODUCTLIST",(Parcelable) list);
-            		//intent.putExtra("search_item", etSearch.getText().toString());
-                	//startActivity(intent);
-            	}
-            }
-		};
+		
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -120,20 +74,11 @@ public class BasketActivity extends Activity {
 					int position, long id) {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(getBaseContext(), DetailActivity.class);
-        		intent.putExtra("PRODUCT",(Parcelable) productList.get(position));
+        		intent.putExtra("PRODUCT",(Parcelable) Const.basketProductList.get(position));
         		startActivity(intent);
-     
-        		
-        		
-        	/*
-        	 * 
-        	 * */	
-        		
-			}
+     		}
 		});
 		listView.setAdapter(adapter);
-		
-		
 	}
 
 	@Override
@@ -156,52 +101,5 @@ public class BasketActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	
+}	
 
-public class SearchData extends AsyncTask<String, Void, Void> {
-		
-		@Override
-		protected void onPreExecute() {
-		};
-
-		@Override
-		protected void onPostExecute(Void result) {
-		}
-
-		@Override
-		protected Void doInBackground(String... params) {
-			String strToSearch = params[0];
-			String mode = params[1];
-			JSONObject json = new JSONObject();
-			try {
-				HttpConnection connection = new HttpConnection();
-				
-				json.put("search", strToSearch);
-				json.put("mode", mode);
-				
-				
-				JSONArray array = connection.connectForCataalog("info_download_cf2", json,Const.CONNECTION_TIMEOUT,Const.SOCKET_TIMEOUT);
-				
-				JSONObject jObj = (JSONObject) array.get(0);
-				int res=Integer.parseInt(jObj.getString("result"));
-				
-				if(res==1){
-					productList=new ListProduct(array);
-					Message message = handler.obtainMessage(1, res, 0);
-					handler.sendMessage(message);
-				}else{
-					Message message = handler.obtainMessage(1, res, 0);
-					handler.sendMessage(message);
-				}
-					
-				
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-				
-
-			return null;
-		};
-	}
-}
