@@ -11,6 +11,8 @@ import android.widget.ImageView;
 public class GalleryImageAdapter extends BaseAdapter 
 {
     private Context mContext;
+    private int number;
+    private String path;
 
     private Integer[] mImageIds = {
            R.drawable.blank,
@@ -18,13 +20,15 @@ public class GalleryImageAdapter extends BaseAdapter
            R.drawable.arrow
     };
 
-    public GalleryImageAdapter(Context context) 
+    public GalleryImageAdapter(Context context, int numberOfImage, String p) 
     {
         mContext = context;
+        number=numberOfImage;
+        path=p;
     }
 
     public int getCount() {
-        return mImageIds.length;
+        return number;
     }
 
     public Object getItem(int position) {
@@ -43,7 +47,9 @@ public class GalleryImageAdapter extends BaseAdapter
 		// TODO Auto-generated method stub
 		ImageView i = new ImageView(mContext);
 
-        i.setImageResource(mImageIds[position]);
+		i=DrawableManager.fetchIvOnThread(path,position, mContext);
+		    
+        
         i.setLayoutParams(new Gallery.LayoutParams(200, 200));
     
         i.setScaleType(ImageView.ScaleType.FIT_XY);

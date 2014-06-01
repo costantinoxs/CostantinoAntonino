@@ -5,20 +5,29 @@ import it.cdpaf.R.id;
 import it.cdpaf.R.layout;
 import it.cdpaf.R.menu;
 import it.cdpaf.R.string;
+import it.cdpaf.activity.SearchActivity.SearchData;
 import it.cdpaf.entity.ListProduct;
 import it.cdpaf.entity.Product;
 import it.cdpaf.helper.Const;
+import it.cdpaf.helper.Dialogs;
 import it.cdpaf.helper.DrawableManager;
 import it.cdpaf.helper.GalleryImageAdapter;
 import it.cdpaf.helper.GenericFunctions;
+import it.cdpaf.helper.HttpConnection;
+import it.cdpaf.helper.ListProductSearchAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -29,7 +38,11 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v13.app.FragmentStatePagerAdapter;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Parcelable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -40,6 +53,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -63,13 +78,15 @@ public class DetailActivity extends FragmentActivity {
 	// list contains fragments to instantiate in the viewpager
 	   List<Fragment> fragments;
 	   DrawableManager drawableM;
+	   static Handler handler;
+	   static Dialogs dialogs;
 	  
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detail);
 
-	
+		dialogs= new Dialogs();
 		drawableM= new DrawableManager();
 		Intent intent = getIntent();
 		product  = (Product) intent.getParcelableExtra("PRODUCT");
@@ -89,6 +106,8 @@ public class DetailActivity extends FragmentActivity {
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
+		
+		
 
 	}
 
@@ -280,22 +299,92 @@ public class DetailActivity extends FragmentActivity {
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_detail_three,
 					container, false);
-			Product prod = getArguments().getParcelable("PRODUCT");
+			final Product prod = getArguments().getParcelable("PRODUCT");
 			
-			ImageView ivGallery = (ImageView) rootView.findViewById(R.id.ivGallery);
-			Gallery gallery = (Gallery) rootView.findViewById(R.id.gallery);
+			final ImageView ivGallery = (ImageView) rootView.findViewById(R.id.ivGallery);
+			final Gallery gallery = (Gallery) rootView.findViewById(R.id.gallery);
 			gallery.setSpacing(1);
 	        
 			DrawableManager draw = new DrawableManager();
-			ArrayList<Drawable> product_images=draw.fetchAllDrawableOnThread(prod.getPercorsoImmagine(), getActivity());
 			
-			gallery.setAdapter(new GalleryImageAdapter(getActivity()));
+			gallery.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					// TODO Auto-generated method stub
+					ivGallery.setImageDrawable(DrawableManager.fetchDrawableFromMap(prod.getPercorsoImmagine(), position, getActivity()));
+				}
+			});
+			ivGallery.setImageDrawable(prod.getImmagine());
+    		
+			SearchPhoto task = new SearchPhoto();
+			task.execute(prod.getPercorsoImmagine());
+			
+			handler = new Handler() {
+	            @Override
+	            public void handleMessage(Message mess) {
+	            	int res = mess.arg1;
+	            	if (res==0){
+	            		AlertDialog dialog=dialogs.ProductNotFount(getActivity());
+	            		dialog.show();
+	            		
+	            	}
+	            	else{
+	            		final GalleryImageAdapter adaptern = 
+	            				new GalleryImageAdapter(getActivity(),res,prod.getPercorsoImmagine());
+	            		gallery.setAdapter(adaptern);
+	            		
+	            	}	
+	            	
+	            }
+			};
 	        
 	        
 			
 			
 			return rootView;
 		}
+		public class SearchPhoto extends AsyncTask<String, Void, Void> {
+			
+			@Override
+			protected void onPreExecute() {
+			};
+
+			@Override
+			protected void onPostExecute(Void result) {
+			}
+
+			@Override
+			protected Void doInBackground(String... params) {
+				String strToSearch = params[0];
+				JSONObject json = new JSONObject();
+				try {
+					HttpConnection connection = new HttpConnection();
+					
+					json.put("photo", strToSearch);
+									
+					JSONObject jObj = connection.connect("info_photo_fake", json,Const.CONNECTION_TIMEOUT,Const.SOCKET_TIMEOUT);
+					
+					
+					int numberOfPhotoToDownload=Integer.parseInt(jObj.getString("result"));
+					
+					Message message = handler.obtainMessage(1, numberOfPhotoToDownload, 0);
+					handler.sendMessage(message);
+					
+						
+					
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+					
+
+				return null;
+			};
+		}
+		
 	}
+
 
 }

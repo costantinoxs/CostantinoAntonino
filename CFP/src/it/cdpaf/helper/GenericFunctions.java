@@ -18,6 +18,14 @@ public class GenericFunctions {
 	        return "";
 	    }
 	}
+	
+	public static String FirstIS(java.io.InputStream is,String str) {
+	    try {
+	        return new java.util.Scanner(is).next(str);
+	    } catch (java.util.NoSuchElementException e) {
+	        return "";
+	    }
+	}
 	public static StringBuilder inputStreamToString(InputStream is) {
 		
 		String rLine = "";

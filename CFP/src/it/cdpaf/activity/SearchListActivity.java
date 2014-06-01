@@ -56,7 +56,7 @@ public class SearchListActivity extends Activity {
 		setContentView(R.layout.activity_search_list);
 		
 		Intent intent = getIntent();
-		search_item=intent.getStringExtra("searc_item");
+		search_item=intent.getStringExtra("search_item");
 		productList  = (ListProduct) intent.getParcelableExtra("PRODUCTLIST");
 		productList.print("List");
 		  
