@@ -176,7 +176,12 @@ public class MainActivity extends Activity {
 		if (id == R.id.action_search_item) {
 			Intent intent = new Intent(getBaseContext(), SearchActivity.class);
 			startActivity(intent);
-			finish();
+			
+		}
+		if (id == R.id.action_basket_item) {
+			Intent intent = new Intent(getBaseContext(), BasketActivity.class);
+			startActivity(intent);
+			
 		}
 		return super.onOptionsItemSelected(item);
 	}

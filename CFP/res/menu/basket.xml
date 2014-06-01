@@ -1,13 +1,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="it.cdpaf.SearchActivity" >
+    tools:context="it.cdpaf.MainActivity" >
 
-   <item
-        android:id="@+id/action_menu_item"
+  
+   
+    <item
+        android:id="@+id/action_basket_item"
         android:orderInCategory="100"
         android:showAsAction="always"
-        android:icon="@drawable/ic_menu_selectall_holo_light"
+        android:icon="@drawable/icons8_preview"
         android:title="Menu"/>
-    
 
 </menu>

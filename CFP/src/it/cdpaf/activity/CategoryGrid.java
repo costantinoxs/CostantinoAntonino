@@ -277,6 +277,10 @@ public class CategoryGrid extends Activity {
 			Intent intent = new Intent(getBaseContext(), SearchActivity.class);
 			startActivity(intent);
 		}
+		if (id == R.id.action_basket_item) {
+			Intent intent = new Intent(getBaseContext(), BasketActivity.class);
+			startActivity(intent);
+		}
 		return super.onOptionsItemSelected(item);
 	}
 

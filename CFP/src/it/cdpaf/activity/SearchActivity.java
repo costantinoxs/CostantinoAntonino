@@ -92,7 +92,7 @@ public class SearchActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.search, menu);
+		getMenuInflater().inflate(R.menu.basket, menu);
 		return true;
 	}
 
@@ -102,11 +102,13 @@ public class SearchActivity extends Activity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_menu_item) {
-			Intent intent = new Intent(getBaseContext(), MainActivity.class);
+		
+		if (id == R.id.action_basket_item) {
+			Intent intent = new Intent(getBaseContext(), BasketActivity.class);
 			startActivity(intent);
-			finish();
+			
 		}
+		
 		return super.onOptionsItemSelected(item);
 	}
 

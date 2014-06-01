@@ -115,7 +115,7 @@ public class DetailActivity extends FragmentActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.detail, menu);
+		getMenuInflater().inflate(R.menu.basket, menu);
 		return true;
 	}
 
@@ -125,8 +125,10 @@ public class DetailActivity extends FragmentActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+		if (id == R.id.action_basket_item) {
+			Intent intent = new Intent(getBaseContext(), BasketActivity.class);
+			startActivity(intent);
+			
 		}
 		return super.onOptionsItemSelected(item);
 	}

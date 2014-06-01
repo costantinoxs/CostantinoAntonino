@@ -39,9 +39,9 @@ import android.os.Build;
 
 
 import it.cdpaf.entity.*;
-public class SearchListActivity extends Activity {
-	private int range=20;
-	private int offset=0;
+
+public class BasketActivity extends Activity {
+	
 	private Handler handler;
 	private Dialogs dialogs;
 	private Context ctx;
@@ -55,7 +55,8 @@ public class SearchListActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ctx=this;
-		setContentView(R.layout.activity_search_list);
+		
+		setContentView(R.layout.activity_basket);
 		
 		Intent intent = getIntent();
 		search_item=intent.getStringExtra("search_item");
@@ -82,8 +83,7 @@ public class SearchListActivity extends Activity {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
             	System.gc();
-            	offset=offset+20;
-            	SearchData task = new SearchData();
+             	SearchData task = new SearchData();
 				if(search_prod_category.length()==0){
 					String mode ="1";
 					task.execute(search_item,mode);
@@ -140,8 +140,7 @@ public class SearchListActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.basket
-				, menu);
+		getMenuInflater().inflate(R.menu.search_list, menu);
 		return true;
 	}
 
@@ -151,10 +150,8 @@ public class SearchListActivity extends Activity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_basket_item) {
-			Intent intent = new Intent(getBaseContext(), BasketActivity.class);
-			startActivity(intent);
-			
+		if (id == R.id.action_settings) {
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -180,8 +177,6 @@ public class SearchData extends AsyncTask<String, Void, Void> {
 				HttpConnection connection = new HttpConnection();
 				
 				json.put("search", strToSearch);
-				json.put("offset", offset);
-				json.put("range", range);
 				json.put("mode", mode);
 				
 				
