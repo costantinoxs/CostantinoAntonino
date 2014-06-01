@@ -1,6 +1,8 @@
 package it.cdpaf.helper;
 
 import it.cdpaf.*;
+import it.cdpaf.entity.ListProduct;
+import it.cdpaf.entity.Product;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -31,19 +33,21 @@ public class Dialogs {
 				.create();
 		return alertDialog;
 	}
-	
+	*/
 	public AlertDialog DeleteDialog(final int position,ListProduct productList,Context ctx) {
 		Product prod = productList.get(position);
 		AlertDialog alertDialog = new AlertDialog.Builder(ctx)
 				.setTitle(prod.getNome())
-				.setMessage(R.string.tMessageDelete)
+				.setMessage("Vuoi Eliminare il prodotto dal carrello?")
 				.setIcon(Const.resize(prod.getImmagine()))
-				.setPositiveButton(R.string.tDeleteProduct,
+				.setPositiveButton("Conferma",
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,
-									int whichButton) {							}
+									int whichButton) {
+								
+							}
 						})
-				.setNegativeButton(R.string.tCancelDelete,
+				.setNegativeButton("Annulla",
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,
 									int which) {
@@ -53,7 +57,7 @@ public class Dialogs {
 						}).create();
 		return alertDialog;
 	}
-
+	/*
 	
 	public AlertDialog ConnectionNotFound(Context ctx) {
 		AlertDialog alertDialog = new AlertDialog.Builder(ctx)

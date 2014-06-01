@@ -17,6 +17,7 @@ import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -30,10 +31,13 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.os.Build;
 
@@ -56,14 +60,13 @@ public class BasketActivity extends Activity {
 		
 		//Const.basketProductList;
 		
-		
+		dialogs=new Dialogs();
 		  
 		final ListView listView =(ListView) findViewById(R.id.listBasket);
 		
 		final ListProductSearchAdapter adapter = 
 				new ListProductSearchAdapter(this,
 				R.layout.product_choice_list_item, Const.basketProductList);
-		
 		
 		
 		
@@ -78,6 +81,41 @@ public class BasketActivity extends Activity {
         		startActivity(intent);
      		}
 		});
+		
+		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
+					final int position, long id) {
+				
+				final AlertDialog dialogBox =dialogs.DeleteDialog(position,Const.basketProductList, ctx);
+				dialogBox.show();
+				
+				Button deleteButton = dialogBox
+						.getButton(DialogInterface.BUTTON_POSITIVE);
+				deleteButton.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						try{
+						
+					    Const.basketProductList.remove(position);
+						adapter.notifyDataSetChanged();
+						
+						//setTotalPrice();
+						
+						}catch (IndexOutOfBoundsException e){
+							adapter.notifyDataSetChanged();
+						}
+						dialogBox.dismiss();	
+					}
+				});
+				
+				
+				
+				return false;
+			}
+		});
+		
 		listView.setAdapter(adapter);
 	}
 
