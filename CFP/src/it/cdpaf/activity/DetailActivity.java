@@ -326,7 +326,7 @@ public class DetailActivity extends FragmentActivity {
 			final ImageView ivGallery = (ImageView) rootView.findViewById(R.id.ivGallery);
 			final Gallery gallery = (Gallery) rootView.findViewById(R.id.gallery);
 			gallery.setSpacing(1);
-	        
+			
 			DrawableManager draw = new DrawableManager();
 			
 			gallery.setOnItemClickListener(new OnItemClickListener() {
@@ -339,9 +339,8 @@ public class DetailActivity extends FragmentActivity {
 				}
 			});
 			ivGallery.setImageDrawable(prod.getImmagine());
-    		
-			SearchPhoto task = new SearchPhoto();
-			task.execute(prod.getPercorsoImmagine());
+    		SearchPhoto task = new SearchPhoto();
+			task.execute(prod.getCodice());
 			
 			handler = new Handler() {
 	            @Override
@@ -356,7 +355,8 @@ public class DetailActivity extends FragmentActivity {
 	            		final GalleryImageAdapter adaptern = 
 	            				new GalleryImageAdapter(getActivity(),res,prod.getPercorsoImmagine());
 	            		gallery.setAdapter(adaptern);
-	            		
+
+	        			gallery.setSelection((Integer)res/2);
 	            	}	
 	            	
 	            }
@@ -386,7 +386,7 @@ public class DetailActivity extends FragmentActivity {
 					
 					json.put("photo", strToSearch);
 									
-					JSONObject jObj = connection.connect("info_photo_fake", json,Const.CONNECTION_TIMEOUT,Const.SOCKET_TIMEOUT);
+					JSONObject jObj = connection.connect("info_photo_right", json,Const.CONNECTION_TIMEOUT,Const.SOCKET_TIMEOUT);
 					
 					
 					int numberOfPhotoToDownload=Integer.parseInt(jObj.getString("result"));
