@@ -47,6 +47,7 @@ public class SearchListActivity extends Activity {
 	private Context ctx;
 	private String search_item;
 	private String mode;
+	private String categoryName;
 	private String search_prod_category="";
 	
 	ListProduct productList;
@@ -60,10 +61,12 @@ public class SearchListActivity extends Activity {
 		Intent intent = getIntent();
 		search_item=intent.getStringExtra("search_item");
 		search_prod_category=intent.getStringExtra("search_prod_category");
+		categoryName=intent.getStringExtra("nomeCategory");
 		mode=intent.getStringExtra("mode");
 		productList  = (ListProduct) intent.getParcelableExtra("PRODUCTLIST");
 		productList.print("List");
-		  
+		
+		setTitle("RISULTATI per: "+categoryName);
 		final ListView listView =(ListView) findViewById(R.id.list);
 		
 		final ListProductSearchAdapter adapter = 

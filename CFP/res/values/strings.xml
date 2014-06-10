@@ -24,6 +24,8 @@
     <string name="label_availability">Disponibilità:</string>
      <string name="Euro">\u20ac</string>
      <string name="btnBuy">Procedi all\'acquisto</string>
+     <string name="toastAddProductBasket">Prodotto aggiunto al carrello</string>
+     <string name="toastShortSearch">Inserisci almeno due caratteri</string>
     
 
 </resources>

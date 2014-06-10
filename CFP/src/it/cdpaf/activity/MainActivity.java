@@ -1,5 +1,8 @@
 package it.cdpaf.activity;
 
+import java.io.ByteArrayOutputStream;
+import java.io.Serializable;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,6 +23,10 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -84,6 +91,7 @@ public class MainActivity extends Activity {
 			adapter = new GridViewAdapter(ctx, R.id.gridMacroCategory, listMacrocategories);
 			gridView.setAdapter(adapter);
 			
+			
 			gridView.setOnItemClickListener(new OnItemClickListener() {
 
 				@Override
@@ -93,7 +101,12 @@ public class MainActivity extends Activity {
 			        Intent intent = new Intent(getBaseContext(), CategoryGrid.class);
             		intent.putExtra("idCategory",listMacrocategories.get(arg2).getId());
             		intent.putExtra("nomeCategory",listMacrocategories.get(arg2).getName());
+            		Drawable d = listMacrocategories.get(arg2).getImmagine();
+            		
+            		Bitmap bitmap = ((BitmapDrawable) d).getBitmap();     
 
+            		
+            		intent.putExtra("Bitmap", bitmap);            		
             		startActivity(intent);
 				}
 			});

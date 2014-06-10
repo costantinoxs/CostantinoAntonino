@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
+
 import it.cdpaf.entity.*;
 import it.cdpaf.helper.*;
 import it.cdpaf.R;
@@ -33,6 +34,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.os.Build;
 
 public class SearchActivity extends Activity {
@@ -59,17 +61,21 @@ public class SearchActivity extends Activity {
             @Override
             public void handleMessage(Message mess) {
             	int res = mess.arg1;
+
+
             	if(res==1){
             		Intent intent = new Intent(getBaseContext(), SearchListActivity.class);
             		intent.putExtra("PRODUCTLIST",(Parcelable) list);
             		intent.putExtra("search_item", etSearch.getText().toString());
             		intent.putExtra("mode",Const.SEARCHMODE);
+            		intent.putExtra("nomeCategory", etSearch.getText().toString());
             		intent.putExtra("search_prod_category", "");
                 	startActivity(intent);
             	}
             	if(res==0){
-            		AlertDialog dialog=dialogs.ProductNotFount(ctx);
-            		dialog.show();
+            		Toast.makeText(ctx, "Nessun prodotto corrispondente alla ricerca effettuata" ,Toast.LENGTH_LONG).show();
+//            		AlertDialog dialog=dialogs.ProductNotFount(ctx);
+//            		dialog.show();
             	}
             }
 		};
@@ -81,9 +87,15 @@ public class SearchActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				offset=0;
-            	SearchData task = new SearchData();
-				task.execute(etSearch.getText().toString());
+				if(etSearch.getText().toString().length()<=1){
+					Toast.makeText(ctx, R.string.toastShortSearch ,Toast.LENGTH_LONG).show();
+				}
+				else{
+					offset=0;
+	            	SearchData task = new SearchData();
+					task.execute(etSearch.getText().toString());
+				}
+				
 			}
 		});
 	}
@@ -139,8 +151,8 @@ public class SearchData extends AsyncTask<String, Void, Void> {
 				JSONArray array = connection.connectForCataalog("info_download_cf2", json,Const.CONNECTION_TIMEOUT,Const.SOCKET_TIMEOUT);
 				
 				JSONObject jObj = (JSONObject) array.get(0);
-				JSONObject jObj2 = (JSONObject) array.get(1);
-				Log.i("Secondo Prodotto",jObj2.toString(4));
+//				JSONObject jObj2 = (JSONObject) array.get(1);
+//				Log.i("Secondo Prodotto",jObj2.toString(4));
 				int res=Integer.parseInt(jObj.getString("result"));
 				
 				if(res==1){

@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
 
+import javax.xml.datatype.Duration;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,6 +33,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -45,6 +48,7 @@ import android.os.Message;
 import android.os.Parcelable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.text.InputFilter.LengthFilter;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -61,6 +65,7 @@ import android.widget.EditText;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DetailActivity extends FragmentActivity {
 
@@ -247,6 +252,7 @@ public class DetailActivity extends FragmentActivity {
 					prod.setIs_basket_product(true);
 					prod.setBasket_quant(Integer.parseInt(etQuant.getText().toString()));
 					Const.basketProductList.add(prod);
+					Toast.makeText(getActivity(), R.string.toastAddProductBasket ,Toast.LENGTH_LONG).show();
 				}
 			});
 			
@@ -317,6 +323,7 @@ public class DetailActivity extends FragmentActivity {
 			String htmlData = "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />" + productTwo.getIcecat();
 			
 			wvIcecat.loadDataWithBaseURL("file:///android_asset/", htmlData , mime, encoding, null);
+			
 			return rootView;
 		}
 	}

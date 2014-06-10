@@ -22,6 +22,7 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -48,6 +49,7 @@ public class CategoryGrid extends Activity {
 	Context ctx;
 	private int idCategory;
 	private String nomeCategory;
+	Bitmap bitmap;
 	
 	private int range=20;
 	private int offset=0;
@@ -64,6 +66,8 @@ public class CategoryGrid extends Activity {
 		// id e nome della categoria selezionato nella activity precedente
 		idCategory = intent.getIntExtra("idCategory",0);
 		nomeCategory = intent.getStringExtra("nomeCategory");
+		bitmap = (Bitmap)this.getIntent().getParcelableExtra("Bitmap");
+		setTitle(nomeCategory);
 
     	//Handler per il messaggio di risposta del Server, proveniente dal Thread.
 		handler = new Handler() {
@@ -74,7 +78,7 @@ public class CategoryGrid extends Activity {
                	
             	if(res==0){
             		//esegui intent visualizzazione prodotti
-            		Log.i("Push", "CIAOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");			        
+            		//Log.i("Push", "CIAOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");			        
 			        
             		handlerProd = new Handler() {
             			@Override
@@ -88,6 +92,7 @@ public class CategoryGrid extends Activity {
                         		intent.putExtra("search_item", "");
                         		intent.putExtra("mode",Const.CATEGORYMODE);
                         		intent.putExtra("search_prod_category", ""+idCategory);
+                        		intent.putExtra("nomeCategory", nomeCategory);
                             	startActivity(intent);
                         	}
                         	else{
