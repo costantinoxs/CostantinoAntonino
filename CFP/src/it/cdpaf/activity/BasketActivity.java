@@ -64,9 +64,9 @@ public class BasketActivity extends Activity {
 		  
 		final ListView listView =(ListView) findViewById(R.id.listBasket);
 		
-		final ListProductSearchAdapter adapter = 
-				new ListProductSearchAdapter(this,
-				R.layout.product_choice_list_item, Const.basketProductList);
+		final ListProductBasketAdapter adapter = 
+				new ListProductBasketAdapter(this,
+				R.layout.product_basket_list_item, Const.basketProductList);
 		
 		
 		

@@ -46,7 +46,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ListProductSearchAdapter extends ArrayAdapter<Product> {
+public class ListProductBasketAdapter extends ArrayAdapter<Product> {
 
 	private LayoutInflater mInflater;
 	private Context context;
@@ -55,7 +55,7 @@ public class ListProductSearchAdapter extends ArrayAdapter<Product> {
 	private ListProduct productList;
 	private int mViewResourceId;
 	
-	public ListProductSearchAdapter(Context ctx, int viewResourceId,ListProduct pList) {
+	public ListProductBasketAdapter(Context ctx, int viewResourceId,ListProduct pList) {
 		super(ctx, viewResourceId, pList);
 		context=ctx;
 		mInflater = (LayoutInflater)ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -89,11 +89,13 @@ public class ListProductSearchAdapter extends ArrayAdapter<Product> {
 		TextView tvTitle = (TextView)convertView.findViewById(R.id.title);
 		TextView tvDescription = (TextView)convertView.findViewById(R.id.prod_description);
 		ImageView iv = (ImageView)convertView.findViewById(R.id.list_elem_image);
+		final TextView tvQuantitative = (TextView)convertView.findViewById(R.id.tvQuantitative);
 		
 		TextView tvPrice = (TextView)convertView.findViewById(R.id.price);
 		
 		tvTitle.setText(productList.get(position).getNome());
 		tvDescription.setText(productList.get(position).getDescrizione());
+		tvQuantitative.setText("Quantità nel carrello:"+" "+productList.get(position).getBasket_quant());
 		
 		
 		

@@ -35,8 +35,8 @@ public final class R {
         public static final int action_settings=0x7f080027;
         public static final int btnSearch=0x7f080006;
         public static final int buttonAddToBasket=0x7f080018;
-        public static final int buttonMinus=0x7f080017;
-        public static final int buttonPlus=0x7f080015;
+        public static final int buttonMinus=0x7f080015;
+        public static final int buttonPlus=0x7f080017;
         public static final int container=0x7f080000;
         public static final int etGenericSearch=0x7f080005;
         public static final int etQuantitative=0x7f080016;
@@ -88,7 +88,8 @@ public final class R {
         public static final int fragment_fanta_search_macrocategory=0x7f03000c;
         public static final int listfooter=0x7f03000d;
         public static final int macrocategory_grid_layout=0x7f03000e;
-        public static final int product_choice_list_item=0x7f03000f;
+        public static final int product_basket_list_item=0x7f03000f;
+        public static final int product_search_list_item=0x7f030010;
     }
     public static final class menu {
         public static final int basket=0x7f070000;

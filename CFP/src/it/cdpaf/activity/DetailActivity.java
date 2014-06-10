@@ -211,6 +211,7 @@ public class DetailActivity extends FragmentActivity {
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_detail_one,
 					container, false);
+			final int quant=1;
 			
 			TextView tvPrice = (TextView) rootView.findViewById(R.id.tvPrice);
 			TextView tvProductor= (TextView) rootView.findViewById(R.id.tvProductor);
@@ -219,9 +220,10 @@ public class DetailActivity extends FragmentActivity {
 			ImageView iv = (ImageView) rootView.findViewById(R.id.ivFirstPhoto);
 			
 			Button buttonMinus = (Button) rootView.findViewById(R.id.buttonMinus);
-			EditText etQuant = (EditText) rootView.findViewById(R.id.etQuantitative);
-			Button ButtonPlus = (Button) rootView.findViewById(R.id.buttonPlus);
+			final EditText etQuant = (EditText) rootView.findViewById(R.id.etQuantitative);
+			Button buttonPlus = (Button) rootView.findViewById(R.id.buttonPlus);
 			Button buttonAddToBasket = (Button) rootView.findViewById(R.id.buttonAddToBasket);
+			etQuant.setText(""+quant);
 			
 			
 			final Product prod = getArguments().getParcelable("PRODUCT");
@@ -241,8 +243,33 @@ public class DetailActivity extends FragmentActivity {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					
+					prod.setIs_basket_product(true);
+					prod.setBasket_quant(Integer.parseInt(etQuant.getText().toString()));
 					Const.basketProductList.add(prod);
+				}
+			});
+			
+			buttonMinus.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					int n=Integer.parseInt(etQuant.getText().toString());
+					if(n>1){
+						n--;
+						etQuant.setText(""+(n));
+					}
+				}
+			});
+			buttonPlus.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					int n=Integer.parseInt(etQuant.getText().toString());
+					n++;
+					etQuant.setText(""+(n));
+					
 				}
 			});
 			return rootView;

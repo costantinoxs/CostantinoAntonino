@@ -23,6 +23,9 @@ public class Product implements Parcelable{
 	private String		nome_sotto_categoria;
 	private Drawable 	immagine;
 	
+	private boolean		is_basket_product;
+	private int			basket_quant;
+	
 	
 	
 	public Product(String id, String codice, String percorsoImmagine,
@@ -44,6 +47,8 @@ public class Product implements Parcelable{
 		this.id_sottocategoria = id_sottocategoria;
 		this.nome_categoria = nome_categoria;
 		this.nome_sotto_categoria = nome_sotto_categoria;
+		this.is_basket_product=false;
+		this.basket_quant=0;
 	}
 
 	public String getId() {
@@ -182,6 +187,7 @@ public class Product implements Parcelable{
 			dest.writeString(id_sottocategoria);
 			dest.writeString(nome_categoria);
 			dest.writeString(nome_sotto_categoria);
+			dest.writeInt(basket_quant);
 						
 	}
 	private Product(Parcel in) {
@@ -200,10 +206,30 @@ public class Product implements Parcelable{
 				this.id_sottocategoria = in.readString();
 				this.nome_categoria = in.readString();
 				this.nome_sotto_categoria = in.readString();
-			
+				this.basket_quant=in.readInt();
+				if(this.basket_quant!=0) this.is_basket_product=true;
+				else this.is_basket_product=false;
 	}
 		 
 	
+	public boolean getIs_basket_product() {
+		return is_basket_product;
+	}
+
+	public void setIs_basket_product(boolean is_basket_product) {
+		this.is_basket_product = is_basket_product;
+	}
+
+
+	public int getBasket_quant() {
+		return basket_quant;
+	}
+
+	public void setBasket_quant(int basket_quant) {
+		this.basket_quant = basket_quant;
+	}
+
+
 	public static final Parcelable.Creator<Product> CREATOR = new Parcelable.Creator<Product>() {
 	     public Product createFromParcel(Parcel in) {
 	         return new Product(in);

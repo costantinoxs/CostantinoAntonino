@@ -145,6 +145,11 @@ public class ListProduct extends ArrayList<Product> implements Parcelable {
 		         return new ListProduct[size];
 		     }
 		};
+
+		public void add(Product prod, int parseInt) {
+			// TODO Auto-generated method stub
+			
+		}
 			
 }
 		

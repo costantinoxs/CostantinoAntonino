@@ -68,7 +68,7 @@ public class SearchListActivity extends Activity {
 		
 		final ListProductSearchAdapter adapter = 
 				new ListProductSearchAdapter(this,
-				R.layout.product_choice_list_item, productList);
+				R.layout.product_search_list_item, productList);
 		
 		
 		View footerView = ((LayoutInflater)this
@@ -102,7 +102,7 @@ public class SearchListActivity extends Activity {
             	if(res==1){
             		final ListProductSearchAdapter adaptern = 
             				new ListProductSearchAdapter(ctx,
-            				R.layout.product_choice_list_item, productList);
+            				R.layout.product_search_list_item, productList);
             		listView.setAdapter(adaptern);
             	}
             	if(res==0){
