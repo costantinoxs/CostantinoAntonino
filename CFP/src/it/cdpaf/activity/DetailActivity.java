@@ -224,6 +224,7 @@ public class DetailActivity extends FragmentActivity {
 			Button buttonPlus = (Button) rootView.findViewById(R.id.buttonPlus);
 			Button buttonAddToBasket = (Button) rootView.findViewById(R.id.buttonAddToBasket);
 			etQuant.setText(""+quant);
+			etQuant.setFocusable(false);
 			
 			
 			final Product prod = getArguments().getParcelable("PRODUCT");
