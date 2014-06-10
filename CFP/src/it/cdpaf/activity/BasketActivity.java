@@ -21,12 +21,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Parcelable;
 import android.support.v4.widget.ListPopupWindowCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -63,12 +65,32 @@ public class BasketActivity extends Activity {
 		dialogs=new Dialogs();
 		  
 		final ListView listView =(ListView) findViewById(R.id.listBasket);
+		Button btnBuy =(Button) findViewById(R.id.btnBuy);
+		
 		
 		final ListProductBasketAdapter adapter = 
 				new ListProductBasketAdapter(this,
 				R.layout.product_basket_list_item, Const.basketProductList);
 		
-		
+		btnBuy.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				String uri = "http://www.computerfamily.it/index.php?main_page=quick_order&action=" +
+						"url_add_products";
+						ListProduct list = Const.basketProductList;
+						for (int i=0; i<list.size(); i++){
+						String model = list.get(i).getCodice();
+						int quantità = list.get(i).getBasket_quant();
+						int j = i+1;
+						uri = uri+"&model_"+j+"="+model+"&qty_"+j+"="+quantità;
+						}
+						Log.i("URI", uri);
+						Intent browse = new Intent( Intent.ACTION_VIEW, Uri.parse(uri) );
+						startActivity(browse);
+			}
+		});
 		
 		listView.setOnItemClickListener(new OnItemClickListener() {
 

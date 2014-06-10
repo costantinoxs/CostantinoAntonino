@@ -23,6 +23,7 @@
     <string name="label_productor">Produttore:</string>
     <string name="label_availability">Disponibilità:</string>
      <string name="Euro">\u20ac</string>
+     <string name="btnBuy">Procedi all\'acquisto</string>
     
 
 </resources>

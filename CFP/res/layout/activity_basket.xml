@@ -1,16 +1,26 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="it.cdpaf.activity.SearchListActivity"
+    android:orientation="vertical"
     tools:ignore="MergeRootFrame" >
 
     <ListView
         android:id="@+id/listBasket"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="0dp"
+        android:layout_weight="9" >
     </ListView>
 
-</FrameLayout>
+    <Button
+        android:id="@+id/btnBuy"
+        android:layout_width="match_parent"
+         android:layout_height="0dp"
+        android:layout_weight="1"
+        
+        android:text="@string/btnBuy" />
+
+</LinearLayout>
 
