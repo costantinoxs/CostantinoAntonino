@@ -60,7 +60,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.fragment_fanta_search_macrocategory);
 		listMacrocategories = new ListMacrocategories();
 		ctx=this;
-		
+	
 		//Log.i("SIZEEEEEE", listMacrocategories.size()+"");
     	//Handler per il messaggio di risposta del Server, proveniente dal Thread.
 		handler = new Handler() {

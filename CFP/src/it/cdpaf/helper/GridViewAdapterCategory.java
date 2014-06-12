@@ -85,7 +85,7 @@ public class GridViewAdapterCategory extends ArrayAdapter<Category> {
 		ImageView iv = (ImageView)convertView.findViewById(R.id.ivCategory);
 		TextView tvTitolo = (TextView) convertView.findViewById(R.id.tvTitleCategory);
 		int h = context.getResources().getDisplayMetrics().densityDpi;
-		convertView.setLayoutParams(new GridView.LayoutParams(h-45, h-39));
+		convertView.setLayoutParams(new GridView.LayoutParams(h, h));
 
 //		ImageView imageView = new ImageView(context);
 //        imageView.setImageResource(R.drawable.ic_launcher);
