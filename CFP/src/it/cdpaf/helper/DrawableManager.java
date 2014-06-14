@@ -23,12 +23,12 @@ under the License.
 import it.cdpaf.*;
 import it.cdpaf.entity.*;
 
-
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,6 +60,21 @@ public class DrawableManager {
     }
 
     public static Drawable fetchDrawable(String urlString, Context ctx) {
+    	byte[] utf8Bytes;
+    	String encodedStr = "";
+		try {
+			utf8Bytes = urlString.getBytes("UTF-8");
+			encodedStr = new String(utf8Bytes, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		
+        urlString = encodedStr;
+        Log.i("TRYCATCHHHHHHHHHHHH", encodedStr+"    "+urlString);
+        urlString = urlString.replace("%c3%a0", "aaaaaa");
+
         if (drawableMap.containsKey(urlString)) {
         	Log.d(ctx.getClass().getSimpleName(),"DRAWABLE MANAGER FD:"+ "RIUSO: "+urlString+" Size:"+drawableMap.size());
         	return drawableMap.get(urlString);

@@ -177,11 +177,12 @@ public class CategoryGrid extends Activity {
 						obj= (JSONObject)arrayObject.get(i);
 						String idCategory = obj.getString("idCategoria");
 						String nome = obj.getString("nome");
-						String nomeImmagine = obj.getString("nomeImmagine");
+						String nomeImmagine = obj.getString("nomeImmagine").replace("\u00e0", "à");
 						Category tempCat;
 						
 						Log.i("idCategoria: ", idCategory);
 						Log.i("nome: ", nome);
+						Log.i("nomeImmagine: ", nomeImmagine);
 						
 						tempCat= new Category(Integer.parseInt(idCategory), nome, nomeImmagine);
 						

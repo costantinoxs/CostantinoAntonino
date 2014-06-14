@@ -6,7 +6,7 @@
     >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textviewListMacrocategory"
         android:layout_width="wrap_content"
         android:layout_height="50dip"
         android:layout_alignParentLeft="true"
