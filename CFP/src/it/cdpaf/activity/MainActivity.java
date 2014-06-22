@@ -11,6 +11,7 @@ import it.cdpaf.R;
 import it.cdpaf.R.id;
 import it.cdpaf.R.layout;
 import it.cdpaf.R.menu;
+import it.cdpaf.R.string;
 import it.cdpaf.entity.ListMacrocategories;
 import it.cdpaf.entity.Macrocategory;
 import it.cdpaf.helper.Const;
@@ -25,6 +26,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -46,11 +49,15 @@ import android.os.Build;
 public class MainActivity extends Activity {
 
 	private GridView gridView;
+	private GridView gridViewB;
 	private Handler handler;
 	private View rootView;
 
 	private GridViewAdapter adapter;
+	private GridViewAdapter adapterB;
 	ListMacrocategories listMacrocategories;
+	ListMacrocategories listMacrocategoriesA;
+	ListMacrocategories listMacrocategoriesB;
 	Context ctx;
 	
 	@Override
@@ -87,9 +94,26 @@ public class MainActivity extends Activity {
 	    	
 	    	Log.i("SIZEEEEEE", listMacrocategories.size()+"");
 			gridView = (GridView) findViewById(R.id.gridMacroCategory);
+			gridViewB = (GridView) findViewById(R.id.gridMacroCategory1);
 			
-			adapter = new GridViewAdapter(ctx, R.id.gridMacroCategory, listMacrocategories);
+			listMacrocategoriesA = new ListMacrocategories();
+			listMacrocategoriesB = new ListMacrocategories();
+			
+			Macrocategory temp = listMacrocategories.get(2);
+			temp.setImmagine( getResources().getDrawable( R.drawable.flagde));
+			temp.setName("CIAOO");
+			
+			listMacrocategoriesA.add(listMacrocategories.get(0));
+			listMacrocategoriesA.add(listMacrocategories.get(1));
+			listMacrocategoriesB.add(temp);
+			listMacrocategoriesB.add(listMacrocategories.get(3));
+			listMacrocategoriesB.add(listMacrocategories.get(4));
+			
+			adapter = new GridViewAdapter(ctx, R.id.gridMacroCategory, listMacrocategoriesA);
+			adapterB = new GridViewAdapter(ctx, R.id.gridMacroCategory1, listMacrocategoriesB);
+			
 			gridView.setAdapter(adapter);
+			gridViewB.setAdapter(adapterB);
 			
 			
 			gridView.setOnItemClickListener(new OnItemClickListener() {
@@ -97,11 +121,30 @@ public class MainActivity extends Activity {
 				@Override
 				public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
 					// TODO Auto-generated method stub
-			        Log.i("Push", ""+arg2+" "+listMacrocategories.get(arg2).getName());
+			        Log.i("Push", ""+arg2+" "+listMacrocategoriesA.get(arg2).getName());
 			        Intent intent = new Intent(getBaseContext(), CategoryGrid.class);
-            		intent.putExtra("idCategory",listMacrocategories.get(arg2).getId());
-            		intent.putExtra("nomeCategory",listMacrocategories.get(arg2).getName());
-            		Drawable d = listMacrocategories.get(arg2).getImmagine();
+            		intent.putExtra("idCategory",listMacrocategoriesA.get(arg2).getId());
+            		intent.putExtra("nomeCategory",listMacrocategoriesA.get(arg2).getName());
+            		Drawable d = listMacrocategoriesA.get(arg2).getImmagine();
+            		
+            		Bitmap bitmap = ((BitmapDrawable) d).getBitmap();     
+
+            		
+            		intent.putExtra("Bitmap", bitmap);            		
+            		startActivity(intent);
+				}
+			});
+			
+			gridViewB.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
+					// TODO Auto-generated method stub
+			        Log.i("Push", ""+arg2+" "+listMacrocategoriesB.get(arg2).getName());
+			        Intent intent = new Intent(getBaseContext(), CategoryGrid.class);
+            		intent.putExtra("idCategory",listMacrocategoriesB.get(arg2).getId());
+            		intent.putExtra("nomeCategory",listMacrocategoriesB.get(arg2).getName());
+            		Drawable d = listMacrocategoriesB.get(arg2).getImmagine();
             		
             		Bitmap bitmap = ((BitmapDrawable) d).getBitmap();     
 

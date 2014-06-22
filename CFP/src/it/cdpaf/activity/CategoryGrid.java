@@ -5,20 +5,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import it.cdpaf.R;
-import it.cdpaf.R.id;
-import it.cdpaf.R.layout;
-import it.cdpaf.R.menu;
 import it.cdpaf.entity.Category;
 import it.cdpaf.entity.ListCategories;
 import it.cdpaf.entity.ListProduct;
 import it.cdpaf.helper.Const;
 import it.cdpaf.helper.GridViewAdapterCategory;
 import it.cdpaf.helper.HttpConnection;
-import it.cdpaf.helper.ListProductSearchAdapter;
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ActionBar;
-import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -29,15 +22,12 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Parcelable;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.os.Build;
 
 public class CategoryGrid extends Activity {
 
