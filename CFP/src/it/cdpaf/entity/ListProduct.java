@@ -43,7 +43,11 @@ public class ListProduct extends ArrayList<Product> implements Parcelable {
 						jTemp.getString("id_categoria"),
 						jTemp.getString("id_sottocategoria"),
 						jTemp.getString("nome_categoria"),
-						jTemp.getString("nome_sotto_categoria"));
+						jTemp.getString("nome_sotto_categoria"),
+						jTemp.getString("part_number"),
+						jTemp.getString("ean"),
+						jTemp.getString("codice_web")
+						);
 				
 				this.add(temp);
 			} catch (JSONException e) {
@@ -108,6 +112,9 @@ public class ListProduct extends ArrayList<Product> implements Parcelable {
 			dest.writeString(this.get(i).getId_sottocategoria());
 			dest.writeString(this.get(i).getNome_categoria());
 			dest.writeString(this.get(i).getNome_sotto_categoria());
+			dest.writeString(this.get(i).getPart_number());
+			dest.writeString(this.get(i).getEan());
+			dest.writeString(this.get(i).getCodice_web());
 		}
 	}
 	private ListProduct(Parcel in) {
@@ -129,8 +136,12 @@ public class ListProduct extends ArrayList<Product> implements Parcelable {
 				 String nome_categoria=in.readString();
 				 String nome_sotto_categoria=in.readString();
 				 
+				 String part_number=in.readString();
+				 String ean=in.readString();
+				 String codice_web=in.readString();
+				 
 				 Product pr = new Product(idcategoria, codice, percorsoImmagine, prezzo, quantitative, produttore,
-						 nome, descrizione, icecat, id_categoria, id_sottocategoria, nome_categoria, nome_sotto_categoria);
+						 nome, descrizione, icecat, id_categoria, id_sottocategoria, nome_categoria, nome_sotto_categoria, part_number, ean, codice_web);
 				 
 				 this.add(pr);
 			     this.print("Lista");

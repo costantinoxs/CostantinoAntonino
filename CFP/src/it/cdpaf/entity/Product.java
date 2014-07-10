@@ -21,6 +21,11 @@ public class Product implements Parcelable{
 	private String		id_sottocategoria;
 	private String		nome_categoria;
 	private String		nome_sotto_categoria;
+	
+	private String		part_number;
+	private String		ean;
+	private String		codice_web;
+	
 	private Drawable 	immagine;
 	
 	private boolean		is_basket_product;
@@ -32,7 +37,7 @@ public class Product implements Parcelable{
 			double prezzo, int quantita, String produttore, String nome,
 			String descrizione, String icecat, String id_categoria,
 			String id_sottocategoria, String nome_categoria,
-			String nome_sotto_categoria) {
+			String nome_sotto_categoria, String part_number, String ean, String codice_web) {
 		super();
 		this.id = id;
 		this.codice = codice;
@@ -49,6 +54,9 @@ public class Product implements Parcelable{
 		this.nome_sotto_categoria = nome_sotto_categoria;
 		this.is_basket_product=false;
 		this.basket_quant=0;
+		this.part_number = part_number;
+		this.ean = ean;
+		this.codice_web = codice_web;
 	}
 
 	public String getId() {
@@ -187,6 +195,11 @@ public class Product implements Parcelable{
 			dest.writeString(id_sottocategoria);
 			dest.writeString(nome_categoria);
 			dest.writeString(nome_sotto_categoria);
+			
+			dest.writeString(part_number);
+			dest.writeString(ean);
+			dest.writeString(codice_web);
+			
 			dest.writeInt(basket_quant);
 						
 	}
@@ -206,6 +219,9 @@ public class Product implements Parcelable{
 				this.id_sottocategoria = in.readString();
 				this.nome_categoria = in.readString();
 				this.nome_sotto_categoria = in.readString();
+				this.part_number = in.readString();
+				this.ean = in.readString();
+				this.codice_web = in.readString();
 				this.basket_quant=in.readInt();
 				if(this.basket_quant!=0) this.is_basket_product=true;
 				else this.is_basket_product=false;
@@ -227,6 +243,33 @@ public class Product implements Parcelable{
 
 	public void setBasket_quant(int basket_quant) {
 		this.basket_quant = basket_quant;
+	}
+
+
+	public String getPart_number() {
+		return part_number;
+	}
+
+	public void setPart_number(String part_number) {
+		this.part_number = part_number;
+	}
+
+
+	public String getEan() {
+		return ean;
+	}
+
+	public void setEan(String ean) {
+		this.ean = ean;
+	}
+
+
+	public String getCodice_web() {
+		return codice_web;
+	}
+
+	public void setCodice_web(String codice_web) {
+		this.codice_web = codice_web;
 	}
 
 

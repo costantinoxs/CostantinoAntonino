@@ -28,6 +28,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
 public class CategoryGrid extends Activity {
 
@@ -87,6 +88,7 @@ public class CategoryGrid extends Activity {
                         	}
                         	else{
                         		finish();
+                        		Toast.makeText(ctx, "Siamo spiacenti ma non esistono prodotti per questa categoria", Toast.LENGTH_LONG).show();;
                         	}
             			}
             		};

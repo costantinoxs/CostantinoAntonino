@@ -49,6 +49,7 @@ import android.os.Parcelable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.text.InputFilter.LengthFilter;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -221,7 +222,9 @@ public class DetailActivity extends FragmentActivity {
 			TextView tvPrice = (TextView) rootView.findViewById(R.id.tvPrice);
 			TextView tvProductor= (TextView) rootView.findViewById(R.id.tvProductor);
 			TextView tvDescription = (TextView) rootView.findViewById(R.id.tvDescription);
-			TextView tvAvailability = (TextView) rootView.findViewById(R.id.tvAvailability);
+			TextView tvPartNumber = (TextView) rootView.findViewById(R.id.tvPartNumber);
+			TextView tvEAN = (TextView) rootView.findViewById(R.id.tvEAN);
+			TextView tvCodiceWeb = (TextView) rootView.findViewById(R.id.tvCodiceWeb);
 			ImageView iv = (ImageView) rootView.findViewById(R.id.ivFirstPhoto);
 			
 			Button buttonMinus = (Button) rootView.findViewById(R.id.buttonMinus);
@@ -237,7 +240,10 @@ public class DetailActivity extends FragmentActivity {
 			tvPrice.setText(GenericFunctions.currencyStamp(prod.getPrezzo()));
 			tvProductor.setText(prod.getProduttore());
 			tvDescription.setText(prod.getDescrizione());
-			tvAvailability.setText(Integer.toString(prod.getQuantita()));
+			tvDescription.setMovementMethod(new ScrollingMovementMethod());
+			tvPartNumber.setText(prod.getPart_number());
+			tvEAN.setText(prod.getEan());
+			tvCodiceWeb.setText(prod.getCodice_web());
 			
 			Drawable d= prod.getImmagine();
 			
@@ -316,11 +322,16 @@ public class DetailActivity extends FragmentActivity {
 			
 			WebView wvIcecat = (WebView) rootView.findViewById(R.id.webView);
 			
+			String prod = productTwo.getIcecat();
+			// elimino dall'icecat prelevato dal database il div utilizzato nel sito
+			String p = prod.substring(21, prod.length());
+			
+			
 			// lets assume we have /assets/style.css file
 			String mime = "text/html";
 			String encoding = "utf-8";
 			Log.i("ICECAT ",productTwo.getIcecat());
-			String htmlData = "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />" + productTwo.getIcecat();
+			String htmlData = "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />" + p;
 			
 			wvIcecat.loadDataWithBaseURL("file:///android_asset/", htmlData , mime, encoding, null);
 			

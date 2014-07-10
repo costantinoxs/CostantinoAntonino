@@ -20,12 +20,15 @@
     <string name="title_activity_detail">Detail</string>
     <string name="label_price">Prezzo:</string>
     <string name="label_description">Descrizione:</string>
-    <string name="label_productor">Produttore:</string>
+    <string name="label_productor">Prod:</string>
     <string name="label_availability">Disponibilità:</string>
      <string name="Euro">\u20ac</string>
      <string name="btnBuy">Procedi all\'acquisto</string>
      <string name="toastAddProductBasket">Prodotto aggiunto al carrello</string>
      <string name="toastShortSearch">Inserisci almeno due caratteri</string>
+     <string name="label_part_number">Part Number:</string>
+     <string name="label_ean">EAN:</string>
+     <string name="label_web_code">Codice WEB:</string>
     
 
 </resources>

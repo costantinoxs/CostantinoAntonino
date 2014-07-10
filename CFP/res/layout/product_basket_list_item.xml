@@ -14,7 +14,10 @@
         android:textColor="#040404"
         android:textSize="15dip"
         android:textStyle="bold"
-        android:typeface="sans" />
+        android:typeface="sans" 
+        android:maxLines="1"
+		android:ellipsize="end"
+		android:scrollHorizontally="true"/>
 
     <TextView
         android:id="@+id/prod_description"
@@ -25,7 +28,10 @@
         android:layout_toLeftOf="@+id/ivDetailImage"
         android:layout_toRightOf="@+id/thumbnail"
         android:textColor="#343434"
-        android:textSize="10dip" />
+        android:textSize="10dip" 
+        android:maxLines="2"
+		android:ellipsize="end"
+		android:scrollHorizontally="true"/>
 
     <ImageView
         android:id="@+id/ivDetailImage"
