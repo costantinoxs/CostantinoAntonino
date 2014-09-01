@@ -60,6 +60,7 @@ public class MainActivity extends Activity {
 	ListMacrocategories listMacrocategoriesB;
 	Context ctx;
 	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -99,13 +100,11 @@ public class MainActivity extends Activity {
 			listMacrocategoriesA = new ListMacrocategories();
 			listMacrocategoriesB = new ListMacrocategories();
 			
-			Macrocategory temp = listMacrocategories.get(2);
-			temp.setImmagine( getResources().getDrawable( R.drawable.flagde));
-			temp.setName("CIAOO");
+			
 			
 			listMacrocategoriesA.add(listMacrocategories.get(0));
 			listMacrocategoriesA.add(listMacrocategories.get(1));
-			listMacrocategoriesB.add(temp);
+			listMacrocategoriesB.add(listMacrocategories.get(2));
 			listMacrocategoriesB.add(listMacrocategories.get(3));
 			listMacrocategoriesB.add(listMacrocategories.get(4));
 			
